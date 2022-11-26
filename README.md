@@ -133,6 +133,8 @@ please-ingame="{RED}Désolée, vous devez être connecter en jeux pour faire cel
 not-connected="{RED}Désolée, ce joueur n'est pas connecté!"
 rank-not-exist="{RED}Désolée, le grade n'existe pas!"
 
+form-not-enabled="{RED}Désolée, les form ne sont pas activer!"
+
 set="{GREEN}Vous avez défini le rank {YELLOW}{RANK}{GREEN} a {YELLOW}{PLAYER}{GREEN} avec succès!"
 give="{GREEN}Vous avez donner le rank {YELLOW}{RANK}{GREEN} a {YELLOW}{PLAYER}{GREEN} avec succès!"
 broadcast-give="{YELLOW}{PLAYER}{WHITE} vien d'obtenir le grade {YELLOW}{RANK}{WHITE}!"
@@ -141,7 +143,7 @@ create="{GREEN}Le grade {YELLOW}{ARGS} {GREEN}a été crée avec succès!"
 delete="{GREEN}Le grade {YELLOW}{ARGS} {GREEN}a été supprimé avec succès!"
 
 addpermission="{GREEN}Vous avez ajouté la permission {YELLOW}{ARGS} {GREEN}avec succès!"
-removepermission="{GREEN}Vous avez ajouté la permission {YELLOW}{ARGS} {GREEN}avec succès!"
+removepermission="{GREEN}Vous avez retiré la permission {YELLOW}{ARGS} {GREEN}avec succès!"
 exist-permission="{RED}Désolée, la permission {YELLOW}{ARGS}{RED} existe déjà!"
 not-exist-permission="{RED}Désolée, la permission {YELLOW}{ARGS}{RED} n'existe pas!"
 
@@ -153,6 +155,9 @@ permissions="Permissions: {BLUE}{RANK_PERMISSIONS}"
 players="Players: {YELLOW}{RANK_PLAYERS}"
 
 user-info="{WHITE}Le joueur {YELLOW}{PLAYER} {WHITE}possède le grade {YELLOW}{RANK}{WHITE}!"
+
+adduserpermission="{GREEN}Vous avez ajouté la permission {YELLOW}{ARGS} {GREEN} à {YELLOW}{PLAYER}{GREEN} avec succès!"
+removeuserpermission="{GREEN}Vous avez retiré la permission {YELLOW}{ARGS} {GREEN}à {YELLOW}{PLAYER}{GREEN} avec succès!"
 ```
 
 ### AdvancedRankExtension
