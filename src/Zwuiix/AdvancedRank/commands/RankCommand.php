@@ -7,6 +7,7 @@ use pocketmine\plugin\Plugin;
 use Zwuiix\AdvancedRank\commands\sub\managePlayers\RankSubGive;
 use Zwuiix\AdvancedRank\commands\sub\managePlayers\RankSubSet;
 use Zwuiix\AdvancedRank\commands\sub\managePlayers\RankSubTempGive;
+use Zwuiix\AdvancedRank\commands\sub\managePlayers\RankSubUserAddPermission;
 use Zwuiix\AdvancedRank\commands\sub\managePlayers\RankSubUserRemovePermission;
 use Zwuiix\AdvancedRank\commands\sub\manageRanks\Manage;
 use Zwuiix\AdvancedRank\commands\sub\manageRanks\RankSubAddPermission;
@@ -51,7 +52,7 @@ class RankCommand extends BaseCommand
         $this->registerSubCommand(new RankSubGive());
         $this->registerSubCommand(new RankSubSet());
         $this->registerSubCommand(new RankSubTempGive());
-        $this->registerSubCommand(new RankSubUserRemovePermission());
+        $this->registerSubCommand(new RankSubUserAddPermission());
         $this->registerSubCommand(new RankSubUserRemovePermission());
         $this->registerSubCommand(new Manage());
         $this->registerSubCommand(new RankSubAddPermission());
