@@ -45,15 +45,7 @@ permissions:
   advancedrank.rank.removeuserpermission:
     default: op
     description: Allow to use AdvancedRank (removeuserpermission) command!
-description: Loaded by FolderPluginLoader
-github: https://github.com/Zwuiix-cmd
-loader:
-  name: FolderPluginLoader
-  main: Zwuiix\Main
-  version: 1.0.0
-  api:
-  - 4.0.0
-  authors:
-  - Zwuiix
-  - pmmp
+  advancedrank.rank.tempgive:
+    default: op
+    description: Allow to use AdvancedRank (tempgive) command!
 ...

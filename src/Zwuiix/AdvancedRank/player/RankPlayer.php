@@ -121,6 +121,73 @@ class RankPlayer
     }
 
     /**
+     * @param int $temp
+     * @return void
+     * @throws JsonException
+     */
+    public function setTemp(mixed $temp): void
+    {
+        $temp = time() + (intval($temp) * 86400);
+        $data = PlayersData::get();
+        $data->setNested($this->getXuid().".temp", $temp);
+        $data->save();
+        $this->initialise();
+    }
+
+    /**
+     * @return void
+     * @throws JsonException
+     */
+    public function removeTemp(): void
+    {
+        $data = PlayersData::get();
+        $data->removeNested($this->getXuid().".temp");
+        $data->save();
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasTempRank(): bool
+    {
+        $data = PlayersData::get();
+        $temp = $data->getNested($this->getXuid().".temp");
+        if(is_null($temp))return false;
+        return true;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isExpired(): bool
+    {
+        $data = PlayersData::get();
+        $temp = $data->getNested($this->getXuid().".temp");
+        if($temp > time()) return false;
+        return true;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getTemps(): ?string
+    {
+        $data = PlayersData::get();
+        $temp = $data->getNested($this->getXuid().".temp");
+        if(is_null($temp)) return "none";
+
+        $remainingTime = $temp - time();
+        $day = floor($remainingTime / 86400);
+        $hourSeconds = $remainingTime % 86400;
+        $hour = floor($hourSeconds / 3600);
+        $minuteSec = $hourSeconds % 3600;
+        $minute = floor($minuteSec / 60);
+        $remainingSec = $minuteSec % 60;
+        $second = ceil($remainingSec);
+        return "{$day}d, {$hour}h, {$minute}m, {$second}s";
+    }
+
+    /**
      * @return void
      */
     private function initialisePermission(): void
@@ -152,6 +219,10 @@ class RankPlayer
     public function initialise(): void
     {
         if(!$this->hasRank()){
+            $this->setRank(RankHandlers::getInstance()->getRankNameByName(PluginData::get()->get("default-rank", "Player")));
+        }
+        if($this->hasTempRank() && $this->isExpired()){
+            $this->removeTemp();
             $this->setRank(RankHandlers::getInstance()->getRankNameByName(PluginData::get()->get("default-rank", "Player")));
         }
         $this->initialisePermission();

@@ -25,6 +25,7 @@ Creation of rank in json or yaml config, lang system in INI and others, if we su
 | Feature                            | AdvancedRank | PurePerms | RankSystem |
 |------------------------------------|--------------|-----------|------------|
 | `MySQL Support`                    | ❌            | ✔         | ✔          |
+| `TempRank`                         | ✔            | ✔         | ✔          |
 | `Easy to use`                      | ✔            | ❌         | ✔          |
 | `Easy Rank Creation / Edit System` | ✔            | ❌         | ✔          |
 | `Multi-language support`           | ✔            | ❌         | ✔          |
