@@ -1,0 +1,7 @@
+{
+  "name": "Player",
+  "priority": 0,
+  "permissions": [],
+  "chat-format": "§7{RANK} {PLAYER}§f: §7{MSG}",
+  "nametag-format": "§7{RANK} {PLAYER}",
+}
