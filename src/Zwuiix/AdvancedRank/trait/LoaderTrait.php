@@ -29,7 +29,7 @@ trait LoaderTrait
         @mkdir($this->getDataFolder()."/rank");
         @mkdir($this->getDataFolder()."/database/");
         $this->saveResource("config.yml");
-        $this->initProviders();
+        //$this->initProviders();
 
         $this->config=new Config($this->getDataFolder()."/config.yml", Config::YAML);
 
