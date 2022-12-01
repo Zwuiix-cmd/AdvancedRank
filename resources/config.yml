@@ -17,7 +17,7 @@ default-rank: "Player"
 form: "true"
 
 # You can add your own language, you just have to create an archive in .ini and respect the name in the lang folder!
-langage: "fr"
+langage: "eng"
 
 # Enables or disables the use of the prefix!
 use-prefix: "true"
