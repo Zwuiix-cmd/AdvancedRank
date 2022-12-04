@@ -21,14 +21,15 @@ class Langage
         $dataFolder=$main->getDataFolder()."/lang/";
 
         $langs = PathScanner::scanDirectoryToConfig($dataFolder, ["ini"], Config::INI);
-        $lang="fr";
+        $lang="null";
         foreach ($langs as $lg){
-            if($lg->get("lang") == $default_lang){
-                $lang = $lg->get("lang");
+            if($lg->getNested("Information.lang") === $default_lang){
+                $lang = $lg->getNested("Information.lang");
                 break;
             }
         }
 
+        Main::getInstance()->notice("[RANK] : Loading {$lang} lang...");
         self::$data = new Config($dataFolder."{$lang}.ini", Config::INI);
     }
 

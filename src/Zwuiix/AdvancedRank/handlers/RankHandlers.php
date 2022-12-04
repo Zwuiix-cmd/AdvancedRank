@@ -179,8 +179,7 @@ class RankHandlers
     {
         $rank_name=[];
         foreach ($this->ranks as $rank => $value){
-            $rk=$this->getRankNameByName($rank);
-            $rank_name[$rk->getPriority()] = $rank;
+            $rank_name[] = $rank;
         }
         return implode("§f, §e", $rank_name);
     }

@@ -1,11 +1,53 @@
 ---
-name: AdvancedDiscord
+name: AdvancedRank
 version: 1.0.0
 api: 4.0.0
-main: Zwuiix\AdvancedDiscord\Main
-depend: DiscordBot
+main: Zwuiix\AdvancedRank\Main
 authors:
 - Zwuiix
+permissions:
+  advancedrank:
+    default: op
+    description: Allow usage of all AdvancedDiscord features
+  advancedrank.rank.set:
+    default: op
+    description: Allow to use AdvancedDiscord (set) command!
+  advancedrank.rank.give:
+    default: op
+    description: Allow to use AdvancedDiscord (give) command!
+  advancedrank.rank.create:
+    default: op
+    description: Allow to use AdvancedDiscord (create) command!
+  advancedrank.rank.delete:
+    default: op
+    description: Allow to use AdvancedDiscord (delete) command!
+  advancedrank.rank.addpermission:
+    default: op
+    description: Allow to use AdvancedDiscord (addpermission) command!
+  advancedrank.rank.removepermission:
+    default: op
+    description: Allow to use AdvancedDiscord (removepermission) command!
+  advancedrank.rank.list:
+    default: op
+    description: Allow to use AdvancedDiscord (list) command!
+  advancedrank.rank.info:
+    default: op
+    description: Allow to use AdvancedDiscord (info) command!
+  advancedrank.rank.user:
+    default: op
+    description: Allow to use AdvancedDiscord (user) command!
+  advancedrank.rank.manage:
+    default: op
+    description: Allow to use AdvancedDiscord (manage) command!
+  advancedrank.rank.adduserpermission:
+    default: op
+    description: Allow to use AdvancedDiscord (adduserpermission) command!
+  advancedrank.rank.removeuserpermission:
+    default: op
+    description: Allow to use AdvancedDiscord (removeuserpermission) command!
+  advancedrank.rank.tempgive:
+    default: op
+    description: Allow to use AdvancedDiscord (tempgive) command!
 description: Loaded by FolderPluginLoader
 github: https://github.com/Zwuiix-cmd
 loader:

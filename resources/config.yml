@@ -8,9 +8,27 @@
 #
 #
 
-server-id: "1035225279628591155"
+default-rank-type: "json"
+default-rank: "Player"
 
-boost:
-  rank: "Booster"
-  role-id: "1035226040873791638"
+# Activate or deactivate the forms,
+# if they are activated you just have to make the command without the arguments,
+# a **CustomForm** is created automatically!
+form: "true"
+
+# You can add your own language, you just have to create an archive in .ini and respect the name in the lang folder!
+langage: "eng"
+
+# Enables or disables the use of the prefix!
+use-prefix: "true"
+
+# This allows you to use the {DAYS}-{MINUTE}-{SECOND}
+timezone: "Europe/Paris"
+
+extensions:
+  EconomyAPI: "false"
+  PiggyFactions: "false"
+  SimpleFaction: "false"
+  FactionMaster: "false"
+  InfoTag: "false"
 ...

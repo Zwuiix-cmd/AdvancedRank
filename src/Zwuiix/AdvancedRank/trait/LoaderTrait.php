@@ -31,6 +31,11 @@ trait LoaderTrait
         $this->saveResource("config.yml");
         //$this->initProviders();
 
+        $langs=["eng", "fr", "grm", "ind", "ru", "spa"];
+        foreach ($langs as $lang){
+            $this->saveResource("/lang/{$lang}.ini");
+        }
+
         $this->config=new Config($this->getDataFolder()."/config.yml", Config::YAML);
 
         $this->saveResource("/lang/fr.ini");

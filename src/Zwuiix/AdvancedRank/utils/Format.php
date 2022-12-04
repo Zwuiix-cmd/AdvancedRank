@@ -44,19 +44,19 @@ class Format
 
         $fm = Format::getInstance()->initialiseColor($message);
         if(Extensions::isLoaded("EconomyAPI")){
-            $fm = EconomyAPI::replace($player, $message);
+            $fm = EconomyAPI::replace($player, $fm);
         }
         if(Extensions::isLoaded("PiggyFactions")){
-            $fm = PiggyFactions::replace($player, $message);
+            $fm = PiggyFactions::replace($player, $fm);
         }
         if(Extensions::isLoaded("SimpleFaction")){
-            $fm = SimpleFaction::replace($player, $message);
+            $fm = SimpleFaction::replace($player, $fm);
         }
         if(Extensions::isLoaded("FactionMaster")){
-            $fm = FactionMaster::replace($player, $message);
+            $fm = FactionMaster::replace($player, $fm);
         }
         if(Extensions::isLoaded("InfoTag")){
-            $fm = InfoTag::replace($player, $message);
+            $fm = InfoTag::replace($player, $fm);
         }
 
         $replace = [

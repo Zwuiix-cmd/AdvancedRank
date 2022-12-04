@@ -9,7 +9,7 @@ use Zwuiix\AdvancedRank\handlers\RankHandlers;
 use Zwuiix\AdvancedRank\player\RankManager;
 use Zwuiix\AdvancedRank\rank\Rank;
 
-abstract class AdvancedRankExtension
+final class AdvancedRankExtension
 {
     use SingletonTrait;
 
@@ -35,9 +35,9 @@ abstract class AdvancedRankExtension
 
     /**
      * @param Player $player
-     * @return Rank|null
+     * @return string|null
      */
-    public function getPlayerRank(Player $player): ?Rank
+    public function getPlayerRank(Player $player): ?string
     {
        $user=RankManager::getInstance()->getPlayer($player);
        return $user->getRankName();

@@ -48,12 +48,8 @@ class Extensions
             Main::getInstance()->getServer()->getLogger()->warning("[EXTENSIONS] : {$extension} not loaded!");
             return false;
         }
-        if(!$plugin->isEnabled()){
-            Main::getInstance()->getServer()->getLogger()->warning("[EXTENSIONS] : {$extension} not loaded!");
-            return false;
-        }
         Main::getInstance()->notice("[EXTENSIONS] : {$plugin->getName()} loaded!");
-        $this->loaded[] = $plugin->getName();
+        $this->loaded[$plugin->getName()] = true;
         return true;
     }
 
