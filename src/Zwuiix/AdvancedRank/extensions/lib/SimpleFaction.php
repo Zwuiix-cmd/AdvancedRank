@@ -27,7 +27,7 @@ class SimpleFaction
     public static function getPlayerRank(RankPlayer $player): string
     {
         if(!FactionsAPI::isInFaction($player->getInitialPlayer()->getName())) return "";
-        return FactionsAPI::getRankName($player->getInitialPlayer()->getName());
+        return FactionsAPI::getRank($player->getInitialPlayer()->getName());
     }
 
     /**
