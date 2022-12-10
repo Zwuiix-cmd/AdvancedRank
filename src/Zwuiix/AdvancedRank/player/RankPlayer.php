@@ -205,10 +205,13 @@ class RankPlayer
             $attachment->setPermission($permission, true);
             $user->addAttachment($plugin, $permission);
         }
-        foreach ($this->getPermissions() as $permission){
-            $attachment = $user->addAttachment($plugin);
-            $attachment->setPermission($permission, true);
-            $user->addAttachment($plugin, $permission);
+
+        if(!is_null($this->getPermissions())){
+            foreach ($this->getPermissions() as $permission){
+                $attachment = $user->addAttachment($plugin);
+                $attachment->setPermission($permission, true);
+                $user->addAttachment($plugin, $permission);
+            }
         }
     }
 
