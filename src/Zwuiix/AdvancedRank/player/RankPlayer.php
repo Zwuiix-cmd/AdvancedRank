@@ -237,6 +237,7 @@ class RankPlayer
         $user=$this->getInitialPlayer();
         $rank_name=$this->getRankName();
         $rank=RankHandlers::getInstance()->getRankNameByName($rank_name);
-        Format::getInstance()->initialise($rank->getNameTag(), $user->getName());
+        $nameTag =  Format::getInstance()->initialise($rank->getNameTag(), $user->getName());
+        $user->setNameTag($nameTag);
     }
 }
