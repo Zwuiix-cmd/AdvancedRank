@@ -46,7 +46,11 @@ class RankPlayer
      */
     public function getPermissions(): array
     {
-        return PlayersData::get()->getNested($this->getXuid().".permissions");
+        $permissions=PlayersData::get()->getNested($this->getXuid().".permissions");
+        if(is_null($permissions)){
+            return [];
+        }
+        return $permissions;
     }
 
     /**
