@@ -195,7 +195,7 @@ class RankPlayer
         $rank=RankHandlers::getInstance()->getRankNameByName($this->getRankName());
         $user=$this->getInitialPlayer();
         $plugin=Main::getInstance();
-        if($rank instanceof Rank)return;
+        if(!$rank instanceof Rank)return;
         if(!is_array($rank->getPermissions())){
             Main::getInstance()->getServer()->getLogger()->warning("[RANK] : Permissions error of {$rank->getName()}");
             return;
