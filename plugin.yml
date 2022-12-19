@@ -48,15 +48,4 @@ permissions:
   advancedrank.rank.tempgive:
     default: op
     description: Allow to use AdvancedStick (tempgive) command!
-description: Loaded by FolderPluginLoader
-github: https://github.com/Zwuiix-cmd
-loader:
-  name: FolderPluginLoader
-  main: Zwuiix\Main
-  version: 1.0.0
-  api:
-  - 4.0.0
-  authors:
-  - Zwuiix
-  - pmmp
 ...
