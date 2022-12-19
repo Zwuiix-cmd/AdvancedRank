@@ -115,13 +115,14 @@ class RankPlayer
      */
     public function setRank(Rank $rank): void
     {
+        $event = new PlayerRankChangeEvent(Main::getInstance(), $this, $rank, $this->getRank());
+        $event->call();
+
         $data = PlayersData::get();
         $data->setNested($this->getXuid().".rank", $rank->getName());
         $data->save();
         $this->initialise();
 
-        $event = new PlayerRankChangeEvent(Main::getInstance(), $this, $rank);
-        $event->call();
     }
 
     /**

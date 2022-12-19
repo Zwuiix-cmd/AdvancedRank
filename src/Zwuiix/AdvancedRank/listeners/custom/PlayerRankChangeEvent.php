@@ -16,7 +16,7 @@ class PlayerRankChangeEvent extends PluginEvent
      * @param RankPlayer $player
      * @param Rank $rank
      */
-    public function __construct(Plugin $plugin, protected RankPlayer $player, protected Rank $rank){
+    public function __construct(Plugin $plugin, protected RankPlayer $player, protected Rank $newrank, protected Rank $oldRank){
         parent::__construct($plugin);
     }
 
@@ -31,8 +31,16 @@ class PlayerRankChangeEvent extends PluginEvent
     /**
      * @return Rank
      */
-    public function getRank(): Rank
+    public function getNewRank(): Rank
     {
-        return $this->rank;
+        return $this->newrank;
+    }
+
+    /**
+     * @return Rank
+     */
+    public function getOldRank(): Rank
+    {
+        return $this->oldRank;
     }
 }
