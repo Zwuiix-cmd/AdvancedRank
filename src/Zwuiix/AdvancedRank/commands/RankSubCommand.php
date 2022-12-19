@@ -42,21 +42,11 @@ abstract class RankSubCommand extends BaseSubCommand
     {
         $commandArguments = [];
         $enums = [];
-        $allArgs=false;
         foreach ($this->getArgumentList() as $position => $arguments) {
             foreach ($arguments as $argument) {
                 $commandArguments[$position] = $argument;
                 if ($argument instanceof StringEnumArgument) $enums[$position] = $argument->getEnumValues();
             }
-        }
-
-        foreach ($args as $arg){
-            if($arg instanceof BaseArgument && isset($arg[$arg->getName()])) $allArgs=true;
-        }
-
-        if($allArgs){
-            $this->onNormalRun($sender, $this->getName(), $args);
-            return;
         }
 
         $form = new CustomForm(function (Player $player, ?array $data) use ($enums): void {

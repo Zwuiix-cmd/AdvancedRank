@@ -8,6 +8,7 @@ use Zwuiix\AdvancedRank\data\Data;
 use Zwuiix\AdvancedRank\data\sub\PlayersData;
 use Zwuiix\AdvancedRank\data\sub\PluginData;
 use Zwuiix\AdvancedRank\handlers\RankHandlers;
+use Zwuiix\AdvancedRank\listeners\custom\PlayerRankChangeEvent;
 use Zwuiix\AdvancedRank\Main;
 use Zwuiix\AdvancedRank\rank\Rank;
 use Zwuiix\AdvancedRank\utils\Format;
@@ -46,11 +47,7 @@ class RankPlayer
      */
     public function getPermissions(): array
     {
-        $permissions=PlayersData::get()->getNested($this->getXuid().".permissions");
-        if(is_null($permissions)){
-            return [];
-        }
-        return $permissions;
+        return PlayersData::get()->getNested($this->getXuid().".permissions");
     }
 
     /**
@@ -122,6 +119,9 @@ class RankPlayer
         $data->setNested($this->getXuid().".rank", $rank->getName());
         $data->save();
         $this->initialise();
+
+        $event = new PlayerRankChangeEvent(Main::getInstance(), $this, $rank);
+        $event->call();
     }
 
     /**
@@ -199,7 +199,7 @@ class RankPlayer
         $rank=RankHandlers::getInstance()->getRankNameByName($this->getRankName());
         $user=$this->getInitialPlayer();
         $plugin=Main::getInstance();
-        if(!$rank instanceof Rank)return;
+        if($rank instanceof Rank)return;
         if(!is_array($rank->getPermissions())){
             Main::getInstance()->getServer()->getLogger()->warning("[RANK] : Permissions error of {$rank->getName()}");
             return;
@@ -209,13 +209,10 @@ class RankPlayer
             $attachment->setPermission($permission, true);
             $user->addAttachment($plugin, $permission);
         }
-
-        if(!is_null($this->getPermissions())){
-            foreach ($this->getPermissions() as $permission){
-                $attachment = $user->addAttachment($plugin);
-                $attachment->setPermission($permission, true);
-                $user->addAttachment($plugin, $permission);
-            }
+        foreach ($this->getPermissions() as $permission){
+            $attachment = $user->addAttachment($plugin);
+            $attachment->setPermission($permission, true);
+            $user->addAttachment($plugin, $permission);
         }
     }
 
@@ -244,7 +241,6 @@ class RankPlayer
         $user=$this->getInitialPlayer();
         $rank_name=$this->getRankName();
         $rank=RankHandlers::getInstance()->getRankNameByName($rank_name);
-        $nameTag =  Format::getInstance()->initialise($rank->getNameTag(), $user->getName());
-        $user->setNameTag($nameTag);
+        Format::getInstance()->initialise($rank->getNameTag(), $user->getName());
     }
 }

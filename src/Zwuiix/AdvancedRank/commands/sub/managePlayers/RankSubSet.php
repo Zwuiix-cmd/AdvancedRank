@@ -43,21 +43,6 @@ class RankSubSet extends RankSubCommand
      */
     public function onNormalRun(CommandSender $sender, string $aliasUsed, array $args): void
     {
-        $this->run($sender, $args);
-    }
-
-    /**
-     * @param CommandSender $sender
-     * @param array $args
-     * @return void
-     */
-    public function onBasicRun(CommandSender $sender, array $args): void
-    {
-        $this->run($sender, $args);
-    }
-
-    private function run(CommandSender|Player $sender, array $args)
-    {
         $player=Server::getInstance()->getPlayerByPrefix($args["name"]);
         if(!$player instanceof Player){
             Message::getInstance()->send($sender, null, "not-connected");

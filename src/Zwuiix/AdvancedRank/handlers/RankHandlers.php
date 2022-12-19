@@ -154,7 +154,6 @@ class RankHandlers
         Main::getInstance()->notice("[RANK] : {$rank->getName()} has been unloader!");
         $this->removeRank($rank);
         unlink(Main::getInstance()->getDataFolder()."/rank/{$rank->getName()}." . PluginData::get()->get("default-rank-type"));
-        rmdir(Main::getInstance()->getDataFolder()."/rank/{$rank->getName()}." . PluginData::get()->get("default-rank-type"));
     }
 
     /**

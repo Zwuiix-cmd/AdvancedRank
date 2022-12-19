@@ -36,32 +36,13 @@ class RankSubGive extends RankSubCommand
     }
 
     /**
-     * @param Player $sender
+     * @param CommandSender $sender
      * @param string $aliasUsed
      * @param array $args
      * @return void
      * @throws JsonException
      */
-    public function onNormalRun(Player $sender, string $aliasUsed, array $args): void
-    {
-        $this->run($sender, $args);
-    }
-
-    /**
-     * @throws JsonException
-     */
-    public function onBasicRun(CommandSender $sender, array $args): void
-    {
-        $this->run($sender, $args);
-    }
-
-    /**
-     * @param CommandSender|Player $sender
-     * @param array $args
-     * @return void
-     * @throws JsonException
-     */
-    private function run(CommandSender|Player $sender, array $args)
+    public function onNormalRun(CommandSender $sender, string $aliasUsed, array $args): void
     {
         $player=Server::getInstance()->getPlayerByPrefix($args["name"]);
         if(!$player instanceof Player){

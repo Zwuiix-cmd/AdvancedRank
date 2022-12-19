@@ -3,8 +3,6 @@
 namespace Zwuiix\AdvancedRank;
 
 use JsonException;
-use pocketmine\item\FishingRod;
-use pocketmine\lang\Language;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\SingletonTrait;
 use Zwuiix\AdvancedRank\lib\CortexPE\Commando\exception\HookAlreadyRegistered;
