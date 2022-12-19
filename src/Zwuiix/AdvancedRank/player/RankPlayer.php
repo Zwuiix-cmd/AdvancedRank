@@ -47,7 +47,8 @@ class RankPlayer
      */
     public function getPermissions(): array
     {
-        return PlayersData::get()->getNested($this->getXuid().".permissions");
+
+        return PlayersData::get()->getNested($this->getXuid().".permissions") ?? [];
     }
 
     /**
@@ -200,7 +201,7 @@ class RankPlayer
         $rank=RankHandlers::getInstance()->getRankNameByName($this->getRankName());
         $user=$this->getInitialPlayer();
         $plugin=Main::getInstance();
-        if($rank instanceof Rank)return;
+        if(!$rank instanceof Rank)return;
         if(!is_array($rank->getPermissions())){
             Main::getInstance()->getServer()->getLogger()->warning("[RANK] : Permissions error of {$rank->getName()}");
             return;
@@ -210,10 +211,12 @@ class RankPlayer
             $attachment->setPermission($permission, true);
             $user->addAttachment($plugin, $permission);
         }
-        foreach ($this->getPermissions() as $permission){
-            $attachment = $user->addAttachment($plugin);
-            $attachment->setPermission($permission, true);
-            $user->addAttachment($plugin, $permission);
+        if(!is_null($this->getPermissions())){
+            foreach ($this->getPermissions() as $permission){
+                $attachment = $user->addAttachment($plugin);
+                $attachment->setPermission($permission, true);
+                $user->addAttachment($plugin, $permission);
+            }
         }
     }
 
@@ -242,6 +245,7 @@ class RankPlayer
         $user=$this->getInitialPlayer();
         $rank_name=$this->getRankName();
         $rank=RankHandlers::getInstance()->getRankNameByName($rank_name);
-        Format::getInstance()->initialise($rank->getNameTag(), $user->getName());
+        $nameTag =  Format::getInstance()->initialise($rank->getNameTag(), $user->getName());
+        $user->setNameTag($nameTag);
     }
 }
