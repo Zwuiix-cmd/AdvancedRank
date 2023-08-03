@@ -26,7 +26,7 @@ class RankSubUserRemovePermission extends RankSubCommand
     {
         $this->registerArgument(0, new RawStringArgument("name"));
         $this->registerArgument(1, new RawStringArgument("permission"));
-        $this->setPermission("rank.removeuserpermission");
+        $this->setPermission("advancedrank.rank.removeuserpermission");
     }
 
     /**

@@ -29,7 +29,7 @@ class RankSubCreate extends RankSubCommand
         $this->registerArgument(2, new RawStringArgument("permissions"));
         $this->registerArgument(3, new RawStringArgument("chat"));
         $this->registerArgument(4, new RawStringArgument("nametag"));
-        $this->setPermission("rank.create");
+        $this->setPermission("advancedrank.rank.create");
     }
 
     /**

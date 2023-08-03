@@ -24,7 +24,7 @@ class RankSubInfo extends RankSubCommand
     protected function prepare(): void
     {
         $this->registerArgument(0, new RawStringArgument("rank"));
-        $this->setPermission("rank.info");
+        $this->setPermission("advancedrank.rank.info");
     }
 
     /**

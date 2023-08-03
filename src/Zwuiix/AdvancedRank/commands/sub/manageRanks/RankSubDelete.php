@@ -23,7 +23,7 @@ class RankSubDelete extends RankSubCommand
     protected function prepare(): void
     {
         $this->registerArgument(0, new RawStringArgument("name"));
-        $this->setPermission("rank.delete");
+        $this->setPermission("advancedrank.rank.delete");
     }
 
     /**

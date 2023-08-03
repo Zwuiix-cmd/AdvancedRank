@@ -29,7 +29,7 @@ class RankSubTempGive extends RankSubCommand
         $this->registerArgument(0, new RawStringArgument("name"));
         $this->registerArgument(1, new RawStringArgument("rank"));
         $this->registerArgument(2, new RawStringArgument("temp"));
-        $this->setPermission("rank.tempgive");
+        $this->setPermission("advancedrank.rank.tempgive");
     }
 
     /**

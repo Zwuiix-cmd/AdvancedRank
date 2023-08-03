@@ -26,7 +26,7 @@ class RankSubUserAddPermission extends RankSubCommand
     {
         $this->registerArgument(0, new RawStringArgument("name"));
         $this->registerArgument(1, new RawStringArgument("permission"));
-        $this->setPermission("rank.adduserpermission");
+        $this->setPermission("advancedrank.rank.adduserpermission");
     }
 
     /**

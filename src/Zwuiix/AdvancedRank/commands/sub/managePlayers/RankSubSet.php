@@ -28,7 +28,7 @@ class RankSubSet extends RankSubCommand
     {
         $this->registerArgument(0, new RawStringArgument("name"));
         $this->registerArgument(1, new RawStringArgument("rank"));
-        $this->setPermission("rank.set");
+        $this->setPermission("advancedrank.rank.set");
     }
 
     /**

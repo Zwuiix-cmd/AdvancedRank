@@ -18,7 +18,7 @@ class RankSubList extends RankSubCommand
      */
     protected function prepare(): void
     {
-        $this->setPermission("rank.list");
+        $this->setPermission("advancedrank.rank.list");
     }
 
     /**

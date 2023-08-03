@@ -28,7 +28,7 @@ class RankSubGive extends RankSubCommand
     {
         $this->registerArgument(0, new RawStringArgument("name"));
         $this->registerArgument(1, new RawStringArgument("rank"));
-        $this->setPermission("rank.give");
+        $this->setPermission("advancedrank.rank.give");
     }
 
     /**

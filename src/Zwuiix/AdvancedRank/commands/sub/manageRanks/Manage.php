@@ -17,7 +17,7 @@ class Manage extends RankSubCommand
 {
     public function __construct()
     {
-        parent::__construct(Main::getInstance(), "manage", "Manage a rank.", []);
+        parent::__construct(Main::getInstance(), "manage", "Manage a advancedrank.rank.", []);
     }
 
     /**
@@ -27,7 +27,7 @@ class Manage extends RankSubCommand
     protected function prepare(): void
     {
         $this->registerArgument(0, new RawStringArgument("name"));
-        $this->setPermission("rank.manage");
+        $this->setPermission("advancedrank.rank.manage");
     }
 
     /**
