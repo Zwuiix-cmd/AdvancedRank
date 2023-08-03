@@ -9,6 +9,7 @@ use Zwuiix\AdvancedRank\handlers\RankHandlers;
 use Zwuiix\AdvancedRank\interface\ManageForm;
 use Zwuiix\AdvancedRank\lib\CortexPE\Commando\args\RawStringArgument;
 use Zwuiix\AdvancedRank\lib\CortexPE\Commando\exception\ArgumentOrderException;
+use Zwuiix\AdvancedRank\Main;
 use Zwuiix\AdvancedRank\rank\Rank;
 use Zwuiix\AdvancedRank\utils\Message;
 
@@ -16,7 +17,7 @@ class Manage extends RankSubCommand
 {
     public function __construct()
     {
-        parent::__construct("manage", "Manage a rank.", []);
+        parent::__construct(Main::getInstance(), "manage", "Manage a rank.", []);
     }
 
     /**

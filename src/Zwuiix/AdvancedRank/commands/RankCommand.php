@@ -4,6 +4,7 @@ namespace Zwuiix\AdvancedRank\commands;
 
 use pocketmine\command\CommandSender;
 use pocketmine\plugin\Plugin;
+use pocketmine\plugin\PluginBase;
 use Zwuiix\AdvancedRank\commands\sub\managePlayers\RankSubGive;
 use Zwuiix\AdvancedRank\commands\sub\managePlayers\RankSubSet;
 use Zwuiix\AdvancedRank\commands\sub\managePlayers\RankSubTempGive;
@@ -18,12 +19,13 @@ use Zwuiix\AdvancedRank\commands\sub\manageRanks\RankSubRemovePermission;
 use Zwuiix\AdvancedRank\commands\sub\others\RankSubList;
 use Zwuiix\AdvancedRank\commands\sub\RankSubUser;
 use Zwuiix\AdvancedRank\lib\CortexPE\Commando\BaseCommand;
+use Zwuiix\AdvancedRank\Main;
 
 class RankCommand extends BaseCommand
 {
-    public function __construct(protected Plugin $plugin)
+    public function __construct()
     {
-        parent::__construct($plugin, "rank", "Manager rank in your server", ["group"]);
+        parent::__construct(Main::getInstance(), "rank", "Manager rank in your server", ["group"]);
     }
 
     protected function prepare(): void

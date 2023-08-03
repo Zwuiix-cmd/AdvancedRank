@@ -4,9 +4,9 @@ namespace Zwuiix\AdvancedRank\commands;
 
 use pocketmine\command\CommandSender;
 use pocketmine\player\Player;
+use pocketmine\plugin\PluginBase;
 use pocketmine\Server;
 use Zwuiix\AdvancedRank\data\sub\PluginData;
-use Zwuiix\AdvancedRank\lib\CortexPE\Commando\args\ArrayStringArgument;
 use Zwuiix\AdvancedRank\lib\CortexPE\Commando\args\BaseArgument;
 use Zwuiix\AdvancedRank\lib\CortexPE\Commando\args\BooleanArgument;
 use Zwuiix\AdvancedRank\lib\CortexPE\Commando\args\FloatArgument;
@@ -14,9 +14,15 @@ use Zwuiix\AdvancedRank\lib\CortexPE\Commando\args\IntegerArgument;
 use Zwuiix\AdvancedRank\lib\CortexPE\Commando\args\StringEnumArgument;
 use Zwuiix\AdvancedRank\lib\CortexPE\Commando\BaseSubCommand;
 use Zwuiix\AdvancedRank\lib\jojoe77777\FormAPI\CustomForm;
+use Zwuiix\AdvancedRank\Main;
 
 abstract class RankSubCommand extends BaseSubCommand
 {
+    public function __construct(string $name, string $description = "", array $aliases = [])
+    {
+        parent::__construct(Main::getInstance(), $name, $description, $aliases);
+    }
+
     public function onRun(CommandSender $sender, string $aliasUsed, array $args): void
     {
         if ($sender instanceof Player) {
@@ -67,7 +73,7 @@ abstract class RankSubCommand extends BaseSubCommand
                     if (!isset($data[$position])) continue;
                     foreach ($arguments as $argument) {
                         $wrappedArgument = $argument;
-                        if ($wrappedArgument instanceof StringEnumArgument && !$wrappedArgument instanceof BooleanArgument) {
+                        if ($wrappedArgument instanceof StringEnumArgument) {
                             $args[$argument->getName()] = $enums[$position][$data[$position]];
                         } elseif ($wrappedArgument instanceof IntegerArgument) {
                             $args[$argument->getName()] = (int)$data[$position];
@@ -84,13 +90,7 @@ abstract class RankSubCommand extends BaseSubCommand
         $form->setTitle("Rank (" . $this->getName() . ")");
         $form->addLabel($this->getDescription());
         foreach ($commandArguments as $argument) {
-            if ($argument instanceof ArrayStringArgument && $this->getName() === "test") {
-                $players = [];
-                foreach (Server::getInstance()->getOnlinePlayers() as $onlinePlayer) {
-                    $players[] = $onlinePlayer->getName();
-                }
-                $form->addDropdown(ucfirst($argument->getName()), $players);
-            }elseif ($argument instanceof BooleanArgument) {
+            if ($argument instanceof BooleanArgument) {
                 $form->addToggle(ucfirst($argument->getName()), $args[$argument->getName()] ?? null);
             } else {
                 $form->addInput(ucfirst($argument->getName()), "", $args[$argument->getName()] ?? null);

@@ -29,8 +29,6 @@ declare(strict_types=1);
 
 namespace Zwuiix\AdvancedRank\lib\CortexPE\Commando;
 
-
-use muqsit\simplepackethandler\SimplePacketHandler;
 use pocketmine\command\CommandSender;
 use pocketmine\event\EventPriority;
 use pocketmine\event\Listener;
@@ -44,6 +42,7 @@ use pocketmine\Server;
 use Zwuiix\AdvancedRank\lib\CortexPE\Commando\exception\HookAlreadyRegistered;
 use Zwuiix\AdvancedRank\lib\CortexPE\Commando\store\SoftEnumStore;
 use Zwuiix\AdvancedRank\lib\CortexPE\Commando\traits\IArgumentable;
+use Zwuiix\AdvancedRank\lib\muqsit\simplepackethandler\SimplePacketHandler;
 use function count;
 
 class PacketHooker implements Listener {
