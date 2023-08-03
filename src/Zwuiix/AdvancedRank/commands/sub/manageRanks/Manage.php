@@ -17,7 +17,7 @@ class Manage extends RankSubCommand
 {
     public function __construct()
     {
-        parent::__construct(Main::getInstance(), "manage", "Manage a advancedrank.rank.", []);
+        parent::__construct("manage", "Manage a advancedrank.rank.", []);
     }
 
     /**
