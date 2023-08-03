@@ -42,7 +42,7 @@ class Base
             "{ID}" => $user->getId(),
             "{ITEM_CUSTOMNAME}" => $user->getInventory()->getItemInHand()->getCustomName(),
             "{ITEM_NAME}" => $user->getInventory()->getItemInHand()->getName(),
-            "{ITEM_ID}" => $user->getInventory()->getItemInHand()->getId(),
+            "{ITEM_ID}" => $user->getInventory()->getItemInHand()->getTypeId(),
             "{COUNT}" => $user->getInventory()->getItemInHand()->getCount(),
             "{ONLINE}" => count(Server::getInstance()->getOnlinePlayers()),
             "{MAX_ONLINE}" => Server::getInstance()->getMaxPlayers(),
