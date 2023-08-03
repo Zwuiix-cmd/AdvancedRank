@@ -33,22 +33,18 @@ namespace Zwuiix\AdvancedRank\lib\CortexPE\Commando\args;
 use pocketmine\command\CommandSender;
 use pocketmine\network\mcpe\protocol\AvailableCommandsPacket;
 use pocketmine\network\mcpe\protocol\types\command\CommandParameter;
-use Zwuiix\AdvancedRank\data\sub\PluginData;
 
 abstract class BaseArgument {
 	/** @var string */
-	protected string $name;
+	protected $name;
 	/** @var bool */
-	protected bool $optional = false;
+	protected $optional = false;
 	/** @var CommandParameter */
-	protected CommandParameter $parameterData;
+	protected $parameterData;
 
 	public function __construct(string $name, bool $optional = false) {
 		$this->name = $name;
-        $this->optional = $optional;
-        if(PluginData::get()->get("form") == "true"){
-            $this->optional = true;
-        }
+		$this->optional = $optional;
 
 		$this->parameterData = new CommandParameter();
 		$this->parameterData->paramName = $name;
@@ -73,7 +69,7 @@ abstract class BaseArgument {
 	 *
 	 * @return mixed
 	 */
-	abstract public function parse(string $argument, CommandSender $sender) : mixed;
+	abstract public function parse(string $argument, CommandSender $sender);
 
 	/**
 	 * @return string

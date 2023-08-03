@@ -33,6 +33,7 @@ namespace Zwuiix\AdvancedRank\lib\CortexPE\Commando\args;
 use pocketmine\command\CommandSender;
 
 class BooleanArgument extends StringEnumArgument {
+
 	protected const VALUES = [
 		"true" => true,
 		"false" => false,
@@ -42,7 +43,11 @@ class BooleanArgument extends StringEnumArgument {
 		return "bool";
 	}
 
-	public function parse(string $argument, CommandSender $sender) : mixed{
+	public function getEnumName(): string {
+		return "bool";
+	}
+
+	public function parse(string $argument, CommandSender $sender) {
 		return $this->getValue($argument);
 	}
 }

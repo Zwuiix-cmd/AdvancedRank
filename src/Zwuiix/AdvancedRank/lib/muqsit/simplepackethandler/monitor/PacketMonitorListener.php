@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Zwuiix\AdvancedRank\lib\muqsit\simplepackethandler\monitor;
 
 use Closure;
-use Zwuiix\AdvancedRank\lib\muqsit\simplepackethandler\utils\Utils;
 use pocketmine\event\EventPriority;
 use pocketmine\event\HandlerListManager;
 use pocketmine\event\RegisteredListener;
@@ -17,6 +16,7 @@ use pocketmine\network\mcpe\protocol\DataPacket;
 use pocketmine\network\mcpe\protocol\ServerboundPacket;
 use pocketmine\plugin\Plugin;
 use pocketmine\Server;
+use Zwuiix\AdvancedRank\lib\muqsit\simplepackethandler\utils\Utils;
 
 final class PacketMonitorListener implements IPacketMonitor{
 

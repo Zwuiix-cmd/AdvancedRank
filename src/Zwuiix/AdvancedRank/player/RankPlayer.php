@@ -4,7 +4,6 @@ namespace Zwuiix\AdvancedRank\player;
 
 use JsonException;
 use pocketmine\player\Player;
-use Zwuiix\AdvancedRank\data\Data;
 use Zwuiix\AdvancedRank\data\sub\PlayersData;
 use Zwuiix\AdvancedRank\data\sub\PluginData;
 use Zwuiix\AdvancedRank\handlers\RankHandlers;
@@ -17,6 +16,7 @@ class RankPlayer
 {
     /** @var Player */
     protected Player $player;
+    protected ChatFormatter $chatFormatter;
 
     /**
      * @param Player $player
@@ -24,6 +24,7 @@ class RankPlayer
     public function __construct(Player $player)
     {
         $this->player = $player;
+        $this->chatFormatter = new ChatFormatter($this);
     }
 
     /**
@@ -247,5 +248,10 @@ class RankPlayer
         $rank=RankHandlers::getInstance()->getRankNameByName($rank_name);
         $nameTag =  Format::getInstance()->initialise($rank->getNameTag(), $user->getName());
         $user->setNameTag($nameTag);
+    }
+
+    public function getChatFormatter()
+    {
+        return $this->chatFormatter;
     }
 }

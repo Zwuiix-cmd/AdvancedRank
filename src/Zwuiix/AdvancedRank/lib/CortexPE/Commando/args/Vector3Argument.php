@@ -31,7 +31,6 @@ namespace Zwuiix\AdvancedRank\lib\CortexPE\Commando\args;
 
 
 use pocketmine\command\CommandSender;
-use pocketmine\entity\Entity;
 use pocketmine\math\Vector3;
 use pocketmine\network\mcpe\protocol\AvailableCommandsPacket;
 use function count;
@@ -64,26 +63,31 @@ class Vector3Argument extends BaseArgument {
 	}
 
 	public function isValidCoordinate(string $coordinate, bool $locatable): bool {
-		return (bool)preg_match("/^(?:" . ($locatable ? "(?:~-|~\+)?" : "") . "-?(?:\d+|\d*\.\d+))" . ($locatable ? "|~" : "") . "$/", $coordinate);
+		return (bool)preg_match("/^(?:" . ($locatable ? "(\\?:~-|~\+)?" : "") . "-?(?:\d+|\d*\.\d+))" . ($locatable ? "|~" : "") . "$/", $coordinate);
 	}
 
-	public function parse(string $argument, CommandSender $sender) : Vector3{
+	public function parse(string $argument, CommandSender $sender) {
 		$coords = explode(" ", $argument);
 		$vals = [];
 		foreach($coords as $k => $coord){
 			$offset = 0;
 			// if it's locatable and starts with ~- or ~+
-			if($sender instanceof Entity && preg_match("/^(?:~-|~\+)|~/", $coord)){
+			if($sender instanceof Vector3 && preg_match("/^(?:~-|~\+)|~/", $coord)){
 				// this will work with -n, +n and "" due to typecast later
 				$offset = substr($coord, 1);
 
 				// replace base coordinate with actual entity coordinates
-				$position = $sender->getPosition();
-				$coord = match ($k) {
-					0 => $position->x,
-					1 => $position->y,
-					2 => $position->z,
-				};
+				switch($k){
+					case 0:
+						$coord = $sender->x;
+						break;
+					case 1:
+						$coord = $sender->y;
+						break;
+					case 2:
+						$coord = $sender->z;
+						break;
+				}
 			}
 			$vals[] = (float)$coord + (float)$offset;
 		}

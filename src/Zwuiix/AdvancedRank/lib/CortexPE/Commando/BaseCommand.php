@@ -29,23 +29,20 @@ declare(strict_types=1);
 
 namespace Zwuiix\AdvancedRank\lib\CortexPE\Commando;
 
-
+use pocketmine\command\Command;
+use pocketmine\command\CommandSender;
+use pocketmine\plugin\PluginBase;
+use pocketmine\plugin\PluginOwned;
+use pocketmine\utils\TextFormat;
 use Zwuiix\AdvancedRank\lib\CortexPE\Commando\constraint\BaseConstraint;
 use Zwuiix\AdvancedRank\lib\CortexPE\Commando\exception\InvalidErrorCode;
 use Zwuiix\AdvancedRank\lib\CortexPE\Commando\traits\ArgumentableTrait;
 use Zwuiix\AdvancedRank\lib\CortexPE\Commando\traits\IArgumentable;
-use InvalidArgumentException;
-use pocketmine\command\Command;
-use pocketmine\command\CommandSender;
-use pocketmine\plugin\Plugin;
-use pocketmine\plugin\PluginOwned;
-use pocketmine\utils\TextFormat;
 use function array_shift;
 use function array_unique;
 use function array_unshift;
 use function count;
 use function dechex;
-use function implode;
 use function str_replace;
 
 abstract class BaseCommand extends Command implements IArgumentable, IRunnable, PluginOwned {
@@ -55,29 +52,31 @@ abstract class BaseCommand extends Command implements IArgumentable, IRunnable, 
 	public const ERR_TOO_MANY_ARGUMENTS = 0x02;
 	public const ERR_INSUFFICIENT_ARGUMENTS = 0x03;
 	public const ERR_NO_ARGUMENTS = 0x04;
+	public const ERR_INVALID_ARGUMENTS = 0x05;
 
 	/** @var string[] */
-	protected array $errorMessages = [
-		self::ERR_INVALID_ARG_VALUE => TextFormat::RED . "Invalid value '{value}' for argument #{position}",
-		self::ERR_TOO_MANY_ARGUMENTS => TextFormat::RED . "Too many arguments given",
-		self::ERR_INSUFFICIENT_ARGUMENTS => TextFormat::RED . "Insufficient number of arguments given",
-		self::ERR_NO_ARGUMENTS => TextFormat::RED . "No arguments are required for this command",
+	protected $errorMessages = [
+		self::ERR_INVALID_ARG_VALUE => TextFormat::RED . "Invalid value '{value}' for argument #{position}. Expecting: {expected}.",
+		self::ERR_TOO_MANY_ARGUMENTS => TextFormat::RED . "Too many arguments given.",
+		self::ERR_INSUFFICIENT_ARGUMENTS => TextFormat::RED . "Insufficient number of arguments given.",
+		self::ERR_NO_ARGUMENTS => TextFormat::RED . "No arguments are required for this command.",
+		self::ERR_INVALID_ARGUMENTS => TextFormat::RED . "Invalid arguments supplied.",
 	];
 
 	/** @var CommandSender */
-	protected CommandSender $currentSender;
+	protected $currentSender;
 
 	/** @var BaseSubCommand[] */
-	private array $subCommands = [];
+	private $subCommands = [];
 
 	/** @var BaseConstraint[] */
-	private array $constraints = [];
+	private $constraints = [];
 
-	/** @var Plugin */
-	private Plugin $plugin;
+	/** @var PluginBase */
+	protected $plugin;
 
 	public function __construct(
-		Plugin $plugin,
+		PluginBase $plugin,
 		string $name,
 		string $description = "",
 		array $aliases = []
@@ -87,45 +86,26 @@ abstract class BaseCommand extends Command implements IArgumentable, IRunnable, 
 
 		$this->prepare();
 
-		$usages = ["/" . $this->generateUsageMessage()];
-		foreach($this->subCommands as $subCommand) {
-			$usages[] = $subCommand->getUsageMessage();
-		}
-		$usages = array_unique($usages);
-		$this->usageMessage = implode("\n - /" . $this->getName() . " ", $usages);
+		$this->usageMessage = $this->generateUsageMessage();
 	}
 
-	public function getOwningPlugin(): Plugin {
+	public function getOwningPlugin(): PluginBase {
 		return $this->plugin;
 	}
 
-	final public function execute(CommandSender $sender, string $commandLabel, array $args){
+	final public function execute(CommandSender $sender, string $usedAlias, array $args) {
 		$this->currentSender = $sender;
-		if(!$this->testPermission($sender)){
+		if(!$this->testPermission($sender)) {
 			return;
 		}
 		/** @var BaseCommand|BaseSubCommand $cmd */
 		$cmd = $this;
 		$passArgs = [];
-		if(count($args) > 0){
-			if(isset($this->subCommands[($label = $args[0])])){
+		if(count($args) > 0) {
+			if(isset($this->subCommands[($label = $args[0])])) {
 				array_shift($args);
-				$cmd = $this->subCommands[$label];
-				$cmd->setCurrentSender($sender);
-				if(!$cmd->testPermissionSilent($sender)) {
-					$msg = $this->getPermissionMessage();
-					if($msg === null) {
-						$sender->sendMessage(
-							$sender->getServer()->getLanguage()->translateString(
-								TextFormat::RED . "%commands.generic.permission"
-							)
-						);
-					} elseif(empty($msg)) {
-						$sender->sendMessage(str_replace("<permission>", $cmd->getPermission(), $msg));
-					}
-
-					return;
-				}
+				$this->subCommands[$label]->execute($sender, $label, $args);
+				return;
 			}
 
 			$passArgs = $this->attemptArgumentParsing($cmd, $args);
@@ -135,12 +115,12 @@ abstract class BaseCommand extends Command implements IArgumentable, IRunnable, 
 		}
 		if($passArgs !== null) {
 			foreach ($cmd->getConstraints() as $constraint){
-				if(!$constraint->test($sender, $commandLabel, $passArgs)){
-					$constraint->onFailure($sender, $commandLabel, $passArgs);
+				if(!$constraint->test($sender, $usedAlias, $passArgs)){
+					$constraint->onFailure($sender, $usedAlias, $passArgs);
 					return;
 				}
 			}
-			$cmd->onRun($sender, $commandLabel, $passArgs);
+			$cmd->onRun($sender, $usedAlias, $passArgs);
 		}
 	}
 
@@ -163,23 +143,19 @@ abstract class BaseCommand extends Command implements IArgumentable, IRunnable, 
 		return $dat["arguments"];
 	}
 
-	/**
-	 * @param CommandSender  $sender
-	 * @param string         $aliasUsed
-	 * @param array|array<string,mixed|array<mixed>> $args
-	 */
 	abstract public function onRun(CommandSender $sender, string $aliasUsed, array $args): void;
 
 	protected function sendUsage(): void {
-		$this->currentSender->sendMessage("Usage: " . $this->getUsage());
+		$this->currentSender->sendMessage(TextFormat::RED . "Usage: " . $this->getUsage());
 	}
 
 	public function sendError(int $errorCode, array $args = []): void {
-		$str = $this->errorMessages[$errorCode];
+		$str = (string)$this->errorMessages[$errorCode];
 		foreach($args as $item => $value) {
-			$str = str_replace('{' . $item . '}', (string) $value, $str);
+			$str = str_replace("{{$item}}", (string)$value, $str);
 		}
 		$this->currentSender->sendMessage($str);
+		$this->sendUsage();
 	}
 
 	public function setErrorFormat(int $errorCode, string $format): void {
@@ -204,7 +180,7 @@ abstract class BaseCommand extends Command implements IArgumentable, IRunnable, 
 				$subCommand->setParent($this);
 				$this->subCommands[$key] = $subCommand;
 			} else {
-				throw new InvalidArgumentException("SubCommand with same name / alias for '$key' already exists");
+				throw new \InvalidArgumentException("SubCommand with same name / alias for '{$key}' already exists");
 			}
 		}
 	}
@@ -229,5 +205,9 @@ abstract class BaseCommand extends Command implements IArgumentable, IRunnable, 
 
 	public function getUsageMessage(): string {
 		return $this->getUsage();
+	}
+
+	public function setCurrentSender(CommandSender $sender): void{
+		$this->currentSender = $sender;
 	}
 }

@@ -4,7 +4,6 @@ namespace Zwuiix\AdvancedRank\utils;
 
 use pocketmine\command\CommandSender;
 use pocketmine\console\ConsoleCommandSender;
-use pocketmine\form\Form;
 use pocketmine\player\Player;
 use pocketmine\Server;
 use pocketmine\utils\SingletonTrait;
@@ -12,7 +11,6 @@ use pocketmine\utils\TextFormat;
 use Zwuiix\AdvancedRank\data\sub\Langage;
 use Zwuiix\AdvancedRank\data\sub\PluginData;
 use Zwuiix\AdvancedRank\handlers\RankHandlers;
-use Zwuiix\AdvancedRank\player\RankPlayer;
 use Zwuiix\AdvancedRank\rank\Rank;
 
 class Message

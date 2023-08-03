@@ -2,20 +2,11 @@
 
 namespace Zwuiix\AdvancedRank\commands\sub\manageRanks;
 
-use JsonException;
-use pocketmine\command\CommandSender;
 use pocketmine\player\Player;
-use pocketmine\Server;
 use Zwuiix\AdvancedRank\commands\RankSubCommand;
-use Zwuiix\AdvancedRank\data\sub\PluginData;
-use Zwuiix\AdvancedRank\extensions\AdvancedRankExtension;
 use Zwuiix\AdvancedRank\handlers\RankHandlers;
-use Zwuiix\AdvancedRank\lib\CortexPE\Commando\args\IntegerArgument;
 use Zwuiix\AdvancedRank\lib\CortexPE\Commando\args\RawStringArgument;
-use Zwuiix\AdvancedRank\lib\CortexPE\Commando\BaseSubCommand;
 use Zwuiix\AdvancedRank\lib\CortexPE\Commando\exception\ArgumentOrderException;
-use Zwuiix\AdvancedRank\player\RankManager;
-use Zwuiix\AdvancedRank\rank\Rank;
 use Zwuiix\AdvancedRank\utils\Message;
 
 class RankSubDelete extends RankSubCommand

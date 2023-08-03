@@ -8,11 +8,10 @@ use pocketmine\utils\SingletonTrait;
 use Zwuiix\AdvancedRank\lib\CortexPE\Commando\exception\HookAlreadyRegistered;
 use Zwuiix\AdvancedRank\lib\CortexPE\Commando\PacketHooker;
 use Zwuiix\AdvancedRank\trait\LoaderTrait;
-use Zwuiix\AdvancedRank\trait\ProviderTrait;
 
 class Main extends PluginBase
 {
-    use SingletonTrait, LoaderTrait, ProviderTrait;
+    use SingletonTrait, LoaderTrait;
 
     /**
      * @throws HookAlreadyRegistered

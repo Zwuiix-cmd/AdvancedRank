@@ -3,8 +3,8 @@
 namespace Zwuiix\AdvancedRank\trait;
 
 use JsonException;
-use Zwuiix\AdvancedRank\config\Config;
 use Zwuiix\AdvancedRank\commands\RankCommand;
+use Zwuiix\AdvancedRank\config\Config;
 use Zwuiix\AdvancedRank\data\Data;
 use Zwuiix\AdvancedRank\extensions\Extensions;
 use Zwuiix\AdvancedRank\handlers\RankHandlers;
@@ -29,7 +29,6 @@ trait LoaderTrait
         @mkdir($this->getDataFolder()."/rank");
         @mkdir($this->getDataFolder()."/database/");
         $this->saveResource("config.yml");
-        //$this->initProviders();
 
         $langs=["eng", "fr", "grm", "ind", "ru", "spa"];
         foreach ($langs as $lang){
