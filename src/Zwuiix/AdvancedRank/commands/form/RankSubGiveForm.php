@@ -8,8 +8,9 @@ use pocketmine\player\Player;
 use pocketmine\Server;
 use Zwuiix\AdvancedRank\commands\RankSubCommand;
 use Zwuiix\AdvancedRank\handlers\RankHandlers;
-use Zwuiix\AdvancedRank\lib\CortexPE\Commando\args\ArrayStringArgument;
 use Zwuiix\AdvancedRank\lib\CortexPE\Commando\args\RawStringArgument;
+use Zwuiix\AdvancedRank\lib\CortexPE\Commando\args\TargetPlayerArgument;
+use Zwuiix\AdvancedRank\lib\CortexPE\Commando\args\TextArgument;
 use Zwuiix\AdvancedRank\lib\CortexPE\Commando\exception\ArgumentOrderException;
 use Zwuiix\AdvancedRank\player\RankManager;
 use Zwuiix\AdvancedRank\rank\Rank;
@@ -27,7 +28,7 @@ class RankSubGiveForm extends RankSubCommand
      */
     protected function prepare(): void
     {
-        $this->registerArgument(0, new ArrayStringArgument("name"));
+        $this->registerArgument(0, new TargetPlayerArgument(false, "name"));
         $this->registerArgument(1, new RawStringArgument("rank"));
         $this->setPermission("rank.give");
     }

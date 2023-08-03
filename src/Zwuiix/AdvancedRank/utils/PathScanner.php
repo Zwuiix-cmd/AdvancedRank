@@ -4,7 +4,7 @@ namespace Zwuiix\AdvancedRank\utils;
 
 use Generator;
 use JsonException;
-use Webmozart\PathUtil\Path;
+use Symfony\Component\Filesystem\Path;
 use Zwuiix\AdvancedRank\config\Config;
 
 class PathScanner
