@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace Zwuiix\AdvancedRank\lib\muqsit\simplepackethandler;
 
 use InvalidArgumentException;
+use pocketmine\event\EventPriority;
+use pocketmine\plugin\Plugin;
 use Zwuiix\AdvancedRank\lib\muqsit\simplepackethandler\interceptor\IPacketInterceptor;
 use Zwuiix\AdvancedRank\lib\muqsit\simplepackethandler\interceptor\PacketInterceptor;
 use Zwuiix\AdvancedRank\lib\muqsit\simplepackethandler\monitor\IPacketMonitor;
 use Zwuiix\AdvancedRank\lib\muqsit\simplepackethandler\monitor\PacketMonitor;
-use pocketmine\event\EventPriority;
-use pocketmine\plugin\Plugin;
 
 final class SimplePacketHandler{
 

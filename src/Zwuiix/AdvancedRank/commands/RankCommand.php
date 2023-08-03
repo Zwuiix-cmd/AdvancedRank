@@ -17,10 +17,7 @@ use Zwuiix\AdvancedRank\commands\sub\manageRanks\RankSubInfo;
 use Zwuiix\AdvancedRank\commands\sub\manageRanks\RankSubRemovePermission;
 use Zwuiix\AdvancedRank\commands\sub\others\RankSubList;
 use Zwuiix\AdvancedRank\commands\sub\RankSubUser;
-use Zwuiix\AdvancedRank\data\sub\PluginData;
 use Zwuiix\AdvancedRank\lib\CortexPE\Commando\BaseCommand;
-use Zwuiix\AdvancedRank\Main;
-use Zwuiix\AdvancedRank\utils\PathScanner;
 
 class RankCommand extends BaseCommand
 {

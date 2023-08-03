@@ -2,7 +2,6 @@
 
 namespace Zwuiix\AdvancedRank\extensions\lib;
 
-use Cassandra\Date;
 use pocketmine\Server;
 use Zwuiix\AdvancedRank\data\sub\PluginData;
 use Zwuiix\AdvancedRank\player\RankPlayer;

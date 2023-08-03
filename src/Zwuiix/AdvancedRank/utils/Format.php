@@ -15,7 +15,6 @@ use Zwuiix\AdvancedRank\extensions\lib\PiggyFactions;
 use Zwuiix\AdvancedRank\extensions\lib\SimpleFaction;
 use Zwuiix\AdvancedRank\handlers\RankHandlers;
 use Zwuiix\AdvancedRank\player\RankManager;
-use Zwuiix\AdvancedRank\player\RankPlayer;
 
 class Format
 {

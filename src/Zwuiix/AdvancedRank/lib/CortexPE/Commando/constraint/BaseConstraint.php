@@ -30,12 +30,12 @@ declare(strict_types=1);
 namespace Zwuiix\AdvancedRank\lib\CortexPE\Commando\constraint;
 
 
-use Zwuiix\AdvancedRank\lib\CortexPE\Commando\IRunnable;
 use pocketmine\command\CommandSender;
+use Zwuiix\AdvancedRank\lib\CortexPE\Commando\IRunnable;
 
 abstract class BaseConstraint {
     /** @var IRunnable */
-    protected IRunnable $context;
+    protected $context;
 
     /**
      * BaseConstraint constructor.

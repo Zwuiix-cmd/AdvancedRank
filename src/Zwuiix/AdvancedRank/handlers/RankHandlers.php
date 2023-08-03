@@ -3,8 +3,6 @@
 namespace Zwuiix\AdvancedRank\handlers;
 
 use JsonException;
-use pocketmine\command\PluginCommand;
-use pocketmine\entity\projectile\Throwable;
 use pocketmine\Server;
 use pocketmine\utils\Config;
 use pocketmine\utils\SingletonTrait;

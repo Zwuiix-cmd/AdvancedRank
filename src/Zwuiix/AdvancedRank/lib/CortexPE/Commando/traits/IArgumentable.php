@@ -30,11 +30,11 @@ declare(strict_types=1);
 namespace Zwuiix\AdvancedRank\lib\CortexPE\Commando\traits;
 
 
-use Zwuiix\AdvancedRank\lib\CortexPE\Commando\args\BaseArgument;
 use pocketmine\command\CommandSender;
+use Zwuiix\AdvancedRank\lib\CortexPE\Commando\args\BaseArgument;
 
 interface IArgumentable {
-	public function generateUsageMessage(): string;
+	public function generateUsageMessage(string $parent = ""): string;
 	public function hasArguments(): bool;
 
 	/**

@@ -2,7 +2,6 @@
 
 namespace Zwuiix\AdvancedRank\extensions;
 
-use pocketmine\network\mcpe\protocol\types\inventory\TransactionData;
 use pocketmine\plugin\Plugin;
 use pocketmine\Server;
 use pocketmine\utils\SingletonTrait;
